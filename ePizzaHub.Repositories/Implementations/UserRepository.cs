@@ -2,6 +2,7 @@
 using ePizzaHub.Core.Entities;
 using ePizzaHub.Models;
 using ePizzaHub.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +46,7 @@ namespace ePizzaHub.Repositories.Implementations
 
         public UserModel ValidateUser(string Email, string Password)
         {
-            User user = _db.Users.Where(u=>u.Email==Email).FirstOrDefault();
+            User user = _db.Users.Include(user => user.Roles).Where(u => u.Email == Email).FirstOrDefault();
             if (user != null)
             {
                 bool isVerify = BCrypt.Net.BCrypt.Verify(Password,user.Password);

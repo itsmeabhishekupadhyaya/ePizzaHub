@@ -25,8 +25,15 @@ namespace ePizzaHub.UI.Controllers
             {
                 UserModel userModel = _authService.ValidateUser(model.Email, model.Password);
                 if (userModel != null) 
-                { 
-
+                {
+                    if (userModel.Roles.Contains("Admin"))
+                        {
+                        return RedirectToAction("Index", "Home", new {area="Admin"});
+                    }
+                    else if (userModel.Roles.Contains("User"))
+                    {
+                        return RedirectToAction("Index", "Home", new { area = "User" });
+                    }
                 }
             }
             
