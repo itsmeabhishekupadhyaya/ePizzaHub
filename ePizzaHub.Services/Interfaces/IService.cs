@@ -1,8 +1,7 @@
 ﻿
-
-namespace ePizzaHub.Repositories.Interfaces
+namespace ePizzaHub.Services.Interfaces
 {
-    public interface IRepository<TEntity> where TEntity : class
+    public interface IService<TEntity> where TEntity : class
     {
         IEnumerable<TEntity> GetAll();
         TEntity Find(object id);
@@ -10,7 +9,6 @@ namespace ePizzaHub.Repositories.Interfaces
         void Update(TEntity entity);
         void Remove(TEntity entity);
         void Delete(object id);
-        int SaveChanges();
-
+       
     }
 }
